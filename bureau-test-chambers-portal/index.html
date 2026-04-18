@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bureau Account Portal</title>
+	<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+	<div class="tos-overlay" id="tos-overlay">
+		<section class="tos-dialog">
+			<p class="eyebrow">Terms Of Service</p>
+			<h2>Bureau Network Access Rules</h2>
+			<p class="hero-text">
+				You need to accept these rules before using the account portal. They apply to account creation, chat, moderation, and any online features connected to the game.
+			</p>
+			<ol class="tos-list">
+				<li>No hacking, cheating, exploit abuse, or attempts to bypass game systems.</li>
+				<li>No inappropriate slurs, hate speech, or abusive slang.</li>
+				<li>No bullying, harassment, threats, or discrimination.</li>
+				<li>No racism, targeted abuse, or identity-based attacks.</li>
+				<li>No sexual content, sexual harassment, or sexually explicit usernames/profile content.</li>
+				<li>No impersonating moderators, developers, or other players.</li>
+				<li>No ban evasion, account sharing for abuse, or attempts to hide moderation violations.</li>
+				<li>Keep usernames, display names, and shared content appropriate for a general audience.</li>
+				<li>Follow moderator and Director instructions during investigations or community safety actions.</li>
+				<li>Have fun, respect other players, and help keep the Bureau community usable for everyone.</li>
+			</ol>
+			<label class="tos-accept">
+				<input id="tos-checkbox" type="checkbox">
+				<span>I have read and agree to the Bureau Terms of Service.</span>
+			</label>
+			<div class="action-row">
+				<button id="tos-accept-button" class="button" type="button">Agree And Continue</button>
+				<button id="tos-decline-button" class="button button-ghost" type="button">Decline</button>
+			</div>
+			<p id="tos-message" class="status-message">You must accept the Terms of Service before using the portal.</p>
+		</section>
+	</div>
+
+	<div class="page-shell">
+		<header class="hero">
+			<div class="hero-copy">
+				<p class="eyebrow">Bureau Identity Network</p>
+				<h1>Account Portal</h1>
+				<p class="hero-text">
+					Sign in to access your account. The game can use the same username and password to load your profile
+					directly from the portal.
+				</p>
+			</div>
+			<div class="hero-card">
+				<p class="card-label">Portal Address</p>
+				<h2 id="portal-address">Portal Online</h2>
+				<p id="portal-note" class="card-note">Sign in here to manage your Bureau account and release community chambers.</p>
+			</div>
+		</header>
+
+		<section class="panel auth-panel" id="auth-panel">
+			<div class="panel-header">
+				<div>
+					<p class="eyebrow">Sign In</p>
+					<h2>Access Your Account</h2>
+				</div>
+				<div class="status-pill" id="connection-state">Waiting</div>
+			</div>
+
+			<div class="auth-grid">
+				<div class="auth-card">
+					<h3>Login</h3>
+					<label class="field">
+						<span>Username</span>
+						<input id="login-username" type="text" autocomplete="username">
+					</label>
+					<label class="field">
+						<span>Password</span>
+						<input id="login-password" type="password" autocomplete="current-password">
+					</label>
+					<div class="action-row">
+						<button id="login-button" class="button" type="button">Sign In</button>
+					</div>
+				</div>
+
+				<div class="auth-card">
+					<h3>Forgot Password</h3>
+					<label class="field">
+						<span>Username</span>
+						<input id="reset-request-username" type="text" autocomplete="username">
+					</label>
+					<div class="action-row">
+						<button id="request-reset-button" class="button button-secondary" type="button">Prepare Reset Link</button>
+					</div>
+					<p id="reset-request-message" class="status-message">Use your username to prepare a one-time password reset link.</p>
+					<div id="reset-request-preview" class="reset-preview hidden">
+						<span>Reset Link</span>
+						<a id="reset-request-link" href="#" target="_self" rel="noopener">Open password reset</a>
+					</div>
+				</div>
+
+				<div class="auth-card">
+					<h3>Register</h3>
+					<label class="field">
+						<span>Username</span>
+						<input id="register-username" type="text" autocomplete="username">
+					</label>
+					<label class="field">
+						<span>Password</span>
+						<input id="register-password" type="password" autocomplete="new-password">
+					</label>
+					<label class="field">
+						<span>Display Name</span>
+						<input id="register-display-name" type="text" maxlength="24" autocomplete="nickname">
+					</label>
+					<label class="field tos-register-field">
+						<span>Terms Confirmation</span>
+						<label class="checkbox-row">
+							<input id="register-accept-tos" type="checkbox">
+							<span>I agree to the Bureau Terms of Service.</span>
+						</label>
+					</label>
+					<div class="action-row">
+						<button id="register-button" class="button button-secondary" type="button">Create Account</button>
+					</div>
+				</div>
+			</div>
+
+			<p id="status-message" class="status-message">Sign in or create an account to open the account portal.</p>
+
+			<section id="reset-panel" class="auth-card reset-panel hidden">
+				<h3>Reset Password</h3>
+				<p class="status-message">This one-time reset link lets you set a new password for the matching account.</p>
+				<label class="field">
+					<span>New Password</span>
+					<input id="reset-new-password" type="password" autocomplete="new-password">
+				</label>
+				<label class="field">
+					<span>Confirm New Password</span>
+					<input id="reset-confirm-password" type="password" autocomplete="new-password">
+				</label>
+				<div class="action-row">
+					<button id="reset-password-button" class="button" type="button">Finish Password Reset</button>
+				</div>
+				<p id="reset-password-message" class="status-message">Reset links expire automatically after a short time.</p>
+			</section>
+		</section>
+
+		<main class="portal-layout hidden" id="portal-layout">
+			<section class="panel account-panel">
+				<div class="panel-header">
+					<div>
+						<p class="eyebrow">Profile</p>
+						<h2>Identity Settings</h2>
+					</div>
+					<div class="status-pill" id="session-role">Player</div>
+				</div>
+
+				<div class="meta-row">
+					<div class="meta-card">
+						<span class="meta-label">Username</span>
+						<strong id="active-username">Not loaded</strong>
+					</div>
+					<div class="meta-card">
+						<span class="meta-label">Status</span>
+						<strong id="ban-label">Active</strong>
+					</div>
+				</div>
+
+				<form id="account-form" class="account-form">
+					<label class="field">
+						<span>Display Name</span>
+						<input id="display-name" name="display_name" type="text" maxlength="24" autocomplete="nickname">
+					</label>
+
+					<div class="field-grid">
+						<label class="field">
+							<span>Suit Preset</span>
+							<select id="suit-preset" name="suit_preset_index">
+								<option value="0">Midnight Shell</option>
+								<option value="1">Steel White</option>
+								<option value="2">Industrial Amber</option>
+								<option value="3">Signal Cyan</option>
+							</select>
+						</label>
+
+						<label class="field">
+							<span>Accent Preset</span>
+							<select id="accent-preset" name="accent_preset_index">
+								<option value="0">Safety Gold</option>
+								<option value="1">Terminal Mint</option>
+								<option value="2">Warning Red</option>
+								<option value="3">Relay Violet</option>
+							</select>
+						</label>
+
+						<label class="field">
+							<span>Visor Preset</span>
+							<select id="visor-preset" name="visor_preset_index">
+								<option value="0">Frost White</option>
+								<option value="1">Clear Cyan</option>
+								<option value="2">Soft Amber</option>
+								<option value="3">Diagnostic Pink</option>
+							</select>
+						</label>
+					</div>
+				</form>
+
+				<div class="action-row">
+					<button id="save-account" class="button" type="button">Save Profile</button>
+					<button id="copy-json" class="button button-secondary" type="button">Copy JSON</button>
+					<button id="logout-button" class="button button-ghost" type="button">Sign Out</button>
+				</div>
+
+				<div class="account-list-shell password-shell">
+					<div class="account-list-header">
+						<h3>Change Password</h3>
+						<span>Signed-In Account Security</span>
+					</div>
+					<div class="field-grid">
+						<label class="field">
+							<span>Current Password</span>
+							<input id="current-password" type="password" autocomplete="current-password">
+						</label>
+						<label class="field">
+							<span>New Password</span>
+							<input id="new-password" type="password" autocomplete="new-password">
+						</label>
+						<label class="field">
+							<span>Confirm New Password</span>
+							<input id="confirm-new-password" type="password" autocomplete="new-password">
+						</label>
+					</div>
+					<div class="action-row">
+						<button id="change-password-button" class="button" type="button">Update Password</button>
+					</div>
+					<p id="password-message" class="status-message">Use your current password and a new password with at least 8 characters.</p>
+				</div>
+			</section>
+
+			<section class="panel preview-panel">
+				<div class="panel-header">
+					<div>
+						<p class="eyebrow">Preview</p>
+						<h2>In-Game Style Snapshot</h2>
+					</div>
+				</div>
+
+				<div class="preview-stage">
+					<div class="preview-card suit-preview" id="avatar-preview">
+						<div class="avatar-head visor-preview" id="preview-head"></div>
+						<div class="avatar-body accent-preview" id="preview-body-core"></div>
+						<div class="avatar-plate accent-preview" id="preview-chest"></div>
+					</div>
+				</div>
+
+				<div class="preview-legend">
+					<div><span class="legend-swatch suit-preview" id="legend-suit"></span>Suit shell</div>
+					<div><span class="legend-swatch accent-preview" id="legend-accent"></span>Accent lighting</div>
+					<div><span class="legend-swatch visor-preview" id="legend-visor"></span>Visor glow</div>
+				</div>
+
+				<div class="json-panel">
+					<div class="json-header">
+						<h3>Embedded JSON</h3>
+						<span>The game can read this after login.</span>
+					</div>
+					<pre id="json-preview">{}</pre>
+				</div>
+			</section>
+
+			<section class="panel released-levels-panel">
+				<div class="panel-header">
+					<div>
+						<p class="eyebrow">Released Chambers</p>
+						<h2>Website Release Catalog</h2>
+					</div>
+					<div class="action-row compact-actions">
+						<span class="status-pill" id="levels-count">0 releases</span>
+						<button id="refresh-levels-button" class="button button-secondary" type="button">Refresh List</button>
+					</div>
+				</div>
+				<p class="status-message">Released chambers appear here after a signed-in publish from the game.</p>
+				<div id="levels-list" class="account-list empty-state">
+					No released chambers have been listed yet.
+				</div>
+			</section>
+
+			<section class="panel released-levels-panel">
+				<div class="panel-header">
+					<div>
+						<p class="eyebrow">Beta Download</p>
+						<h2>Free Project Download</h2>
+					</div>
+					<div class="action-row compact-actions">
+						<span class="status-pill" id="builds-count">0 builds</span>
+						<button id="refresh-builds-button" class="button button-secondary" type="button">Refresh Build List</button>
+					</div>
+				</div>
+				<p class="status-message">Public beta packages appear here when a free download is available.</p>
+				<div id="builds-list" class="account-list empty-state">
+					No public beta downloads are available yet.
+				</div>
+			</section>
+
+			<section class="panel admin-panel">
+				<div class="panel-header">
+					<div>
+						<p class="eyebrow">Moderation</p>
+						<h2>Director And Moderator Access</h2>
+					</div>
+					<div class="status-pill" id="admin-state">No Access</div>
+				</div>
+
+				<div class="admin-hint">
+					<p><strong>Director username:</strong> <code>director</code></p>
+					<p>Moderators can ban or unban standard player accounts. Only the Director can assign or remove moderators.</p>
+				</div>
+
+				<div class="field">
+					<span>Moderation Verification Username</span>
+					<input id="moderation-username" type="text" autocomplete="username" placeholder="Re-enter your moderator or Director username">
+				</div>
+				<div class="field">
+					<span>Moderation Verification Password</span>
+					<input id="moderation-password" type="password" autocomplete="current-password" placeholder="Re-enter your password before ban or unban">
+				</div>
+				<label class="field">
+					<span>Moderation Reason</span>
+					<textarea id="moderation-reason" rows="3" maxlength="240" placeholder="Required. Explain why you are banning, unbanning, promoting, or demoting this account."></textarea>
+				</label>
+				<p id="moderation-message" class="status-message">Sign in as a moderator or the Director, then enter your username and password here before using ban or unban.</p>
+
+				<div class="account-list-shell">
+					<div class="account-list-header">
+						<h3>Registered Accounts</h3>
+						<span id="account-count">0 accounts</span>
+					</div>
+					<div id="account-list" class="account-list empty-state">
+						Sign in as a moderator or the Director to view the account registry.
+					</div>
+				</div>
+
+				<div class="account-list-shell audit-shell">
+					<div class="account-list-header">
+						<h3>Moderation Audit Log</h3>
+						<span id="audit-count">0 entries</span>
+					</div>
+					<label class="field audit-search-field">
+						<span>Search Audit Log</span>
+						<input id="audit-search" type="text" placeholder="Search by actor, target, action, reason, or IP">
+					</label>
+					<div id="audit-log" class="account-list empty-state">
+						Sign in as a moderator or the Director to review moderation history.
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+
+	<script id="bureau-account-json" type="application/json">null</script>
+	<script>
+		window.BUREAU_ACCOUNT = null;
+	</script>
+	<script src="/app.js"></script>
+</body>
+</html>

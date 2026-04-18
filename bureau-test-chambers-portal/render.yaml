@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: bureau-account-portal
+    env: python
+    plan: starter
+    buildCommand: ""
+    startCommand: python3 -u server.py
+    healthCheckPath: /healthz
+    disk:
+      name: bureau-account-portal-data
+      mountPath: /var/data/bureau-account-portal
+      sizeGB: 1
+    envVars:
+      - key: BUREAU_ENV
+        value: production
+      - key: BUREAU_DATA_DIR
+        value: /var/data/bureau-account-portal
+      - key: BUREAU_PORTAL_HOST
+        value: 0.0.0.0
+      - key: BUREAU_PORTAL_PORT
+        value: 10000
+      - key: BUREAU_PUBLIC_BASE_URL
+        sync: false
+      - key: BUREAU_ENABLE_DEV_DEFAULTS
+        value: 0
+      - key: BUREAU_ALLOW_REGISTRATION
+        value: 1
+      - key: BUREAU_REQUIRE_HTTPS
+        value: 1
+      - key: BUREAU_DIRECTOR_USERNAME
+        value: director
+      - key: BUREAU_DIRECTOR_PASSWORD
+        sync: false
+      - key: BUREAU_PASSWORD_RESET_TTL_SECONDS
+        value: 1800
+      - key: BUREAU_RESET_LINK_PREVIEW
+        value: 0
+      - key: BUREAU_MAX_JSON_BODY_BYTES
+        value: 65536

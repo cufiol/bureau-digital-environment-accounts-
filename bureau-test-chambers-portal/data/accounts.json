@@ -1,0 +1,24 @@
+{
+  "acct_local": {
+    "account_id": "acct_local",
+    "username": "localuser",
+    "password_hash": "pbkdf2_sha256$240000$k+xOvITTuLn137VIhhGycQ==$gw+a7jR3uQ+2oynb1Sfdzqlq+yBq0NLcOlAjc3C7tVM=",
+    "display_name": "Test Subject",
+    "suit_preset_index": 0,
+    "accent_preset_index": 0,
+    "visor_preset_index": 0,
+    "role": "player",
+    "banned": false
+  },
+  "acct_director": {
+    "account_id": "acct_director",
+    "username": "director",
+    "password_hash": "pbkdf2_sha256$240000$nBfukcs0b2wEa9UnRW0i+w==$i7PNYcKBWhols1ZU8OzdLukLiwSRz2WjpLYDT4N1JIw=",
+    "display_name": "Facility Director",
+    "suit_preset_index": 1,
+    "accent_preset_index": 0,
+    "visor_preset_index": 0,
+    "role": "director",
+    "banned": false
+  }
+}
